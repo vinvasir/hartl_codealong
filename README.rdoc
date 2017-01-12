@@ -1,4 +1,3 @@
 == README
 
 Just a codealong as I review Rails concepts with the new edition of Hartl's book.
-<tt>rake doc:app</tt>.
