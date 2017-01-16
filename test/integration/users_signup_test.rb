@@ -21,6 +21,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'users/show'
     assert_select "div.alert-success", "Welcome to the Sample App!"
+    assert is_logged_in?
   end
 
   test "invalid signup info does not save" do
@@ -29,6 +30,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 	    post signup_path, @invalid_user
 	  end
     assert_template 'users/new'
+    assert_not is_logged_in?
   end
 
   test "invalid signup info results in correct error messages" do
@@ -39,5 +41,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   	assert_select error_msg, "Name can't be blank"
   	assert_select error_msg, "Password confirmation doesn't match Password"
   	assert_select error_msg, "Password is too short (minimum is 6 characters)"
+    assert_not is_logged_in?
   end  
 end
